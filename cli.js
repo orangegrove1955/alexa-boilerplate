@@ -38,13 +38,17 @@ function question(q) {
  */
 function createDirectory(pathName) {
   fs.mkdirSync(`./${pathName}`);
+  fs.mkdirSync(`./${pathName}/hooks`);
+  fs.mkdirSync(`./${pathName}/models`);
+  fs.mkdirSync(`./${pathName}/lambda`);
+  fs.mkdirSync(`./${pathName}/lambda/custom`);
 }
 
 /**
- * Creates a skill.json file in the directory, with the name of the skill as
- * input by the user
+ * Creates a skill.json file in the directory, and adds all locales
+ * selected by userwith the name of the skill
  * @param {string} skillName Name of skill as input by user
- * @param {string} pathName Name of path to create skill.json under
+ * @param {string} pathName Path to create skill.json under
  * @param {[string]} locales List of locales to add to skill manifest
  */
 function generateSkillManifest(skillName, pathName, locales = ["en-US"]) {
@@ -54,6 +58,21 @@ function generateSkillManifest(skillName, pathName, locales = ["en-US"]) {
   data = data
     .replace(/\[skillName\]/g, skillName)
     .replace(/\[lambdaName\]/g, `${pathName}-lambda`);
+
+  // JSONify the data and add locales
+  let json = JSON.parse(data);
+  let jsonLocales = json.manifest.publishingInformation.locales;
+  const localeValue = {
+    summary: "Sample Short Description",
+    examplePhrases: [`Alexa open ${skillName}`, "hello", "help"],
+    name: `${skillName}`,
+    description: "Sample Full Description"
+  };
+  locales.forEach(locale => {
+    jsonLocales[locale] = localeValue;
+  });
+  data = JSON.stringify(json, null, "\t");
+
   // Write new file in directory
   fs.writeFile(`${pathName}/skill.json`, data, () => {});
 }

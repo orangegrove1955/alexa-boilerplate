@@ -2,12 +2,6 @@
   "manifest": {
     "publishingInformation": {
       "locales": {
-        "en-US": {
-          "summary": "Sample Short Description",
-          "examplePhrases": ["Alexa open [skillName]", "hello", "help"],
-          "name": "[skillName]",
-          "description": "Sample Full Description"
-        }
       },
       "isAvailableWorldwide": true,
       "testingInstructions": "Sample Testing Instructions.",
