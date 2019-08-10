@@ -85,10 +85,10 @@ function generateCustomIntents(intents) {
 async function main() {
   // TODO: Regex check to enforce name
   const skillName = await question("What do you want to call your new skill? ");
-  // Create path name from user input
-  pathName = skillName.toLowerCase().trim().replace(/\s+/g, "-");
-  createDirectory(pathName);
-  generateSkillManifest(skillName, pathName);
+  const pathName = skillName
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-");
 
   // TODO: Add language options
   //   const language = await question("Language: (en-US) ")
@@ -101,6 +101,9 @@ async function main() {
   //     "Enter a comma seperated list of custom intent names: "
   //   );
   //   intents = intents.split(",").map(intent => intent.trim());
+
+  createDirectory(pathName);
+  generateSkillManifest(skillName, pathName);
   //   generateCustomIntents(intents);
   rl.close();
 }
