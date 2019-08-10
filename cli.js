@@ -77,7 +77,7 @@ async function main() {
   //   const language = await question("Language: (en-US) ")
 
   // TODO: Add category options
-  const category = await question("Skill category: (KNOWLEDGE_AND_TRIVIA)")
+  //   const category = await question("Skill category: (KNOWLEDGE_AND_TRIVIA)");
 
   // Get intent names
   //   let intents = await question(
