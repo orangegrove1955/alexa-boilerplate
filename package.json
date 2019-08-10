@@ -7,5 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Matthew Williams <orangegrove_1955@hotmail.com> (https://github.com/orangegrove1955)",
-  "license": "ISC"
+  "license": "ISC",
+  "bin": {
+    "alexa-boilerplate": "./cli.js"
+  }
 }
