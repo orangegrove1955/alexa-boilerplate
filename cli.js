@@ -38,10 +38,16 @@ function question(q) {
  */
 function createDirectory(pathName) {
   fs.mkdirSync(`./${pathName}`);
-  fs.mkdirSync(`./${pathName}/hooks`);
   fs.mkdirSync(`./${pathName}/models`);
   fs.mkdirSync(`./${pathName}/lambda`);
   fs.mkdirSync(`./${pathName}/lambda/custom`);
+
+  // Add all hooks to hooks folder
+  const hookPath = `./${pathName}/hooks`
+  fs.mkdirSync(hookPath);
+  fs.readdirSync('./hooks').forEach(file =>{
+      fs.copyFileSync(`./hooks/${file}`, `${hookPath}/${file}`);
+  });
 }
 
 /**
