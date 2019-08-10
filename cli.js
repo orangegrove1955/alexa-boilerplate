@@ -55,9 +55,7 @@ function generateSkillManifest(skillName, pathName, locales = ["en-US"]) {
   // Read data from skill.json template
   let data = fs.readFileSync("skill.json", "utf-8");
   // Replace data with user values
-  data = data
-    .replace(/\[skillName\]/g, skillName)
-    .replace(/\[lambdaName\]/g, `${pathName}-lambda`);
+  data = data.replace(/\[lambdaName\]/g, `${pathName}-lambda`);
 
   // JSONify the data and add locales
   let json = JSON.parse(data);
@@ -88,7 +86,7 @@ async function main() {
   // TODO: Regex check to enforce name
   const skillName = await question("What do you want to call your new skill? ");
   // Create path name from user input
-  pathName = skillName.toLowerCase().replace(/ /g, "-");
+  pathName = skillName.toLowerCase().trim().replace(/\s+/g, "-");
   createDirectory(pathName);
   generateSkillManifest(skillName, pathName);
 
